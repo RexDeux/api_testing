@@ -1,0 +1,31 @@
+<h1>Books</h1>
+
+<%= form_tag(books_path, method: :get, class: "search-form") do %>
+  <div class="search-group">
+    <%= text_field_tag(:search, params[:search], placeholder: "Search books by title", class: "search-input") %>
+    <%= submit_tag("Search", class: "search-button") %>
+  </div>
+  <div class="search-group">
+    <%= text_field_tag(:author, params[:author], placeholder: "Search books by author", class: "search-input") %>
+    <%= submit_tag("Search", class: "search-button") %>
+  </div>
+<% end %>
+
+<table class="book-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>
+        <td><%= book.category.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
