@@ -9,9 +9,20 @@ class BooksController < ApplicationController
       @books = Book.all
     end
   end
+
+  def all
+    @books = Book.all
+    render json: @books
+  end
+
   # GET /books/:id
   def show
-    render json: @book
+    @book = Book.find_by(id: params[:id])
+    if @book
+      render json: @book
+    else
+      render json: { error: "Book not found" }, status: :not_found
+    end
   end
 
   # POST /books
